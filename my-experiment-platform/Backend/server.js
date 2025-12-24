@@ -4,8 +4,12 @@ const port = process.env.PORT || 10000; // përdor portin e Render, ose 10000 lo
 app.listen(port, () => {
   console.log(`Backend running on port ${port}`);
 });
-app.get('/', (req, res) => {
-  res.send('Backend is running!');
+const path = require('path');
+
+app.use(express.static(path.join(__dirname, '../Frontend')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/index.html'));
 });
 
 
@@ -19,5 +23,6 @@ app.get('/data', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Backend running on port ${PORT}`);
 });
+
 
 
