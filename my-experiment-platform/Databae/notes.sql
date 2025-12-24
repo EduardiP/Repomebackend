@@ -1,7 +1,9 @@
--- Shembull i thjeshtë
 CREATE TABLE notes (
     id SERIAL PRIMARY KEY,
-    text VARCHAR(255)
+    title VARCHAR(255) NOT NULL,
+    content TEXT
 );
 
-INSERT INTO notes (text) VALUES ('First note'), ('Second note');
+INSERT INTO notes (title, content) VALUES
+('Shënimi i parë', 'Ky është shembulli i parë.'),
+('Shënimi i dytë', 'Ky është shembulli i dytë.');
