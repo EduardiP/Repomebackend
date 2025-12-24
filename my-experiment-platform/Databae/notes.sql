@@ -1,9 +1,13 @@
-CREATE TABLE notes (
+-- Krijo tabelën notes
+CREATE TABLE IF NOT EXISTS notes (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    content TEXT
+    title VARCHAR(255) NOT NULL
 );
 
-INSERT INTO notes (title, content) VALUES
-('Shënimi i parë', 'Ky është shembulli i parë.'),
-('Shënimi i dytë', 'Ky është shembulli i dytë.');
+-- Shto disa fruta për test
+INSERT INTO notes (title) VALUES 
+('Apple'),
+('Banana'),
+('Cherry'),
+('Mango'),
+('Grapes');
