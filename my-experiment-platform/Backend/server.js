@@ -4,13 +4,7 @@ const port = process.env.PORT || 10000; // përdor portin e Render, ose 10000 lo
 app.listen(port, () => {
   console.log(`Backend running on port ${port}`);
 });
-const path = require('path');
 
-app.use(express.static(path.join(__dirname, '../Frontend')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend/index.html'));
-});
 
 
 // Sample data (do të zëvendësohej me databazë)
@@ -23,6 +17,7 @@ app.get('/data', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Backend running on port ${PORT}`);
 });
+
 
 
 
