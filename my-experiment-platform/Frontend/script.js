@@ -1,13 +1,23 @@
-const button = document.getElementById('getNote');
-const result = document.getElementById('noteResult');
+const button = document.getElementById('fruitButton');
+const bestFruit = document.getElementById('bestFruit');
+const dbFruit = document.getElementById('dbFruit');
 
 button.addEventListener('click', () => {
-  fetch('/note')
+  fetch('/best-fruit')
     .then(res => res.json())
     .then(data => {
-      result.textContent = `${data.title}: ${data.content}`;
+      bestFruit.textContent = data.bestFruit;
     })
     .catch(err => {
-      result.textContent = 'Error: ' + err;
+      bestFruit.textContent = 'Gabim: ' + err;
+    });
+
+  fetch('/random-fruit')
+    .then(res => res.json())
+    .then(data => {
+      dbFruit.textContent = `Fruti nga database: ${data.fruit}`;
+    })
+    .catch(err => {
+      dbFruit.textContent = 'Gabim: ' + err;
     });
 });
