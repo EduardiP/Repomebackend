@@ -4,6 +4,9 @@ const port = process.env.PORT || 10000; // përdor portin e Render, ose 10000 lo
 app.listen(port, () => {
   console.log(`Backend running on port ${port}`);
 });
+app.get('/', (req, res) => {
+  res.send('Backend is running!');
+});
 
 
 // Sample data (do të zëvendësohej me databazë)
@@ -16,4 +19,5 @@ app.get('/data', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Backend running on port ${PORT}`);
 });
+
 
