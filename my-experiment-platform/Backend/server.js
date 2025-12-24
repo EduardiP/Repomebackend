@@ -1,28 +1,38 @@
 const express = require('express');
-const path = require('path'); // shto path për frontend
+const path = require('path');
+const { Pool } = require('pg');
 const app = express();
 
-const PORT = process.env.PORT || 10000; // përdor portin e Render, ose 10000 lokal
+const PORT = process.env.PORT || 10000;
 
-// Sample data (mund të zëvendësohet me databazë)
-const sampleData = ["Apple", "Banana", "Cherry"];
-app.get('/data', (req, res) => {
-    res.json(sampleData);
+// Lidhja me database (Render jep DATABASE_URL)
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // për Render
 });
 
-// Serve frontend files
+// Route për të marrë një shënim nga database
+app.get('/note', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM notes LIMIT 1');
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Gabim në server' });
+  }
+});
+
+// Serve frontend
 app.use(express.static(path.join(__dirname, '../Frontend')));
 
-// Nëse duam që çdo request të kthejë index.html (për SPA)
+// SPA fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../Frontend/index.html'));
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`Backend running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
-
 
 
 
